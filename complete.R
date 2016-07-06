@@ -1,7 +1,7 @@
 complete <- function(directory, id = 1:332){
     ##directory is char vector, length 1, indication location of files
     
-    ##id is integer cevtor indicating monitor id numbers to be used
+    ##id is integer vector indicating monitor id numbers to be used
     
     ##Return data frames of the form:
     ##id  nobs
@@ -13,27 +13,23 @@ complete <- function(directory, id = 1:332){
     #read files into memory
     files <- list.files(directory, full.names=TRUE)
     
+    #create data frame to store data
     nobs.complete <-  data.frame(sensors=id,observations=NA)
-    print(id)
-    for (i in id){
-        datafile <- read.csv(files[i])
+   
+    #retrieve data and store in dataframe, ignoring NA values
+    for (i in 1:length(id)){
+        datafile <- read.csv(files[id[i]])
         datafile <-  na.omit(datafile)
-        nobs.complete[i,1] <- i
+        nobs.complete[i,1] <- id[i]
         nobs.complete[i,2] <- length(datafile[,3])
     }
 
 
-    print(nobs.complete)
-    nobs.complete <- na.omit(nobs.complete)
+    #rename columns for printing to fix id=id
     colnames(nobs.complete) <- c("id", "nobs")
-    rownames(nobs.complete) <- NULL
-    subset(nobs.complete, id==id)
-    
-    #combined.data
-    #length(combined.data[,3=i])                  
-    #length((combined.data[id][!is.na(combined.data[])]))
-    
-    
-    
-   # colnames(nobs.complete) <- c("id", "nobs") 
+
+    #return data
+    nobs.complete
+
+
 }
