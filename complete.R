@@ -1,4 +1,4 @@
-complete <- function(directory, id = 1:332){
+complete <- function(directory, id=1:332){
     ##directory is char vector, length 1, indication location of files
     
     ##id is integer vector indicating monitor id numbers to be used
@@ -14,7 +14,7 @@ complete <- function(directory, id = 1:332){
     files <- list.files(directory, full.names=TRUE)
     
     #create data frame to store data
-    nobs.complete <-  data.frame(sensors=id,observations=NA)
+    nobs.complete <-  data.frame(sensors=NA,observations=NA)
    
     #retrieve data and store in dataframe, ignoring NA values
     for (i in 1:length(id)){
